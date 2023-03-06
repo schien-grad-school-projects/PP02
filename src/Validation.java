@@ -5,10 +5,6 @@ public class Validation {
   public boolean aValidNumber(String n) {
 
 	long number = Long.parseLong(n);
-    boolean l = (numLength(number) >= 13) && (numLength(number) <= 16);
-    boolean p = (prefixCheck(number, 4) || prefixCheck(number, 5) ||
-            prefixCheck(number, 6) || prefixCheck(number, 37));
-    boolean g = (totalEevenNumbers(number) + totalOddNumbers(number)) % 10 == 0;
     return  (numLength(number) >= 13) && (numLength(number) <= 16) &&
             (prefixCheck(number, 4) || prefixCheck(number, 5) ||
                     prefixCheck(number, 6) || prefixCheck(number, 37)) &&
