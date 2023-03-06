@@ -1,3 +1,4 @@
+import javax.swing.*;
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,8 +12,7 @@ public class Payment {
 
 	// this will check whether a card is valid
 	public static Boolean isValidCard(String number){
-		Validation validation = new Validation();
-		return validation.aValidNumber(number);
+		return validating.aValidNumber(number);
 	}// end of the isValidCard method
 
 	// creates a hash code for the credit card number to be stored in file

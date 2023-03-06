@@ -5,8 +5,14 @@ public class Validation {
   public boolean aValidNumber(String n) {
 
 	long number = Long.parseLong(n);
-	return
-        (totalEevenNumbers(number) + totalOddNumbers(number)) % 10 == 0;
+    boolean l = (numLength(number) >= 13) && (numLength(number) <= 16);
+    boolean p = (prefixCheck(number, 4) || prefixCheck(number, 5) ||
+            prefixCheck(number, 6) || prefixCheck(number, 37));
+    boolean g = (totalEevenNumbers(number) + totalOddNumbers(number)) % 10 == 0;
+    return  (numLength(number) >= 13) && (numLength(number) <= 16) &&
+            (prefixCheck(number, 4) || prefixCheck(number, 5) ||
+                    prefixCheck(number, 6) || prefixCheck(number, 37)) &&
+            (totalEevenNumbers(number) + totalOddNumbers(number)) % 10 == 0;
   }// end of aValidNumber method
 
   //get the sum of even places numbers, Starting from the second digit from right
@@ -14,8 +20,9 @@ public class Validation {
     String stringNumber  = Long.toString(number);
     int sum = 0;
     for (int i = stringNumber.length()-2; i > -1 ; i-=2) {
-      int tmpNum = Integer.valueOf(stringNumber.charAt(i)) * 2;
-      if(tmpNum < 9 ){
+
+      int tmpNum = Integer.valueOf(stringNumber.charAt(i)-'0') * 2;
+      if(tmpNum > 9 ){
         sum+= tmpNum/10 + tmpNum%10;
       }
       else{
@@ -38,7 +45,7 @@ public class Validation {
     String stringNumber  = Long.toString(number);
     int sum = 0;
     for (int i = stringNumber.length()-1; i > -1 ; i-=2) {
-      int tmpNum = Integer.valueOf(stringNumber.charAt(i));
+      int tmpNum = Integer.valueOf(stringNumber.charAt(i)-'0');
       sum+=tmpNum;
     }
     return sum;
@@ -46,21 +53,25 @@ public class Validation {
 
   // Return true if the digit d is a prefix for number
   private boolean prefixCheck(long number, int d) {
-
-	 return true;
+    String dString = String.valueOf(d);
+    String numberString = String.valueOf(number).substring(0,dString.length());
+    boolean n = numberString.equals(dString);
+    return numberString.equals(dString);
   }// end of prefixCheck method
 
 
   // Return the number of digits in this number parameter
   private int numLength(long number) {
-
-    return 0;
+    return String.valueOf(number).length();
   }// end of numLength method
 
   // Return the first k number of digits from number, which is either a first digit or first two digits
   // Depending on the card type
   private long numPrefix(long number, int k) {
-      return 0L;
+    String numberString = String.valueOf(number);
+    String kString = String.valueOf(k);
+
+    return 0L;
   }// end of numPrefix method
 
 }// end of the class
