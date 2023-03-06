@@ -1,4 +1,7 @@
 import javax.xml.crypto.Data;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Payment {
 
@@ -8,9 +11,8 @@ public class Payment {
 
 	// this will check whether a card is valid
 	public static Boolean isValidCard(String number){
-
-		return true;
-
+		Validation validation = new Validation();
+		return validation.aValidNumber(number);
 	}// end of the isValidCard method
 
 	// creates a hash code for the credit card number to be stored in file
@@ -23,7 +25,9 @@ public class Payment {
 
      // it adds a new customer to the array of customers once the payment was successful
  	 public static void addCustomer(Customer customer){
-
+		 List<Customer> c = Arrays.asList(customers);
+		 c.add(customer);
+		 customers = c.stream().toArray(Customer[]::new);
  	 } // end of the addCustomer method
 
 
