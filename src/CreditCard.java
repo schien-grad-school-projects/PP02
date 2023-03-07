@@ -23,4 +23,9 @@ public class CreditCard {
 	public void setExpDate(String expDate) {
 		this.expDate = expDate;
 	}
+
+	@Override
+	public String toString() {
+		return " Credit Card:" + " number= " + number + ", expDate= " + expDate;
+	}
 }

@@ -54,4 +54,10 @@ public class Customer {
 	public void setCard(CreditCard card) {
 		this.card = card;
 	}
+
+	@Override
+	public String toString() {
+		return fName + " " + lName + " (id:" + id + ")"
+				+ " Payment: $" + String.format("%.2f", amount) + card.toString();
+	}
 }
