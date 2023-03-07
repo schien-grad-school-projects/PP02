@@ -49,10 +49,8 @@ public class Validation {
 
   // Return true if the digit d is a prefix for number
   private boolean prefixCheck(long number, int d) {
-    String dString = String.valueOf(d);
-    String numberString = String.valueOf(number).substring(0,dString.length());
-    boolean n = numberString.equals(dString);
-    return numberString.equals(dString);
+    long prefix = numPrefix(number,d);
+    return prefix == d;
   }// end of prefixCheck method
 
 
@@ -64,10 +62,9 @@ public class Validation {
   // Return the first k number of digits from number, which is either a first digit or first two digits
   // Depending on the card type
   private long numPrefix(long number, int k) {
-    String numberString = String.valueOf(number);
-    String kString = String.valueOf(k);
-
-    return 0L;
+    String dString = String.valueOf(k);
+    String prefix = String.valueOf(number).substring(0,dString.length());
+    return Long.parseLong(prefix);
   }// end of numPrefix method
 
 }// end of the class

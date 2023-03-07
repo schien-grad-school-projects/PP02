@@ -1,13 +1,17 @@
 import javax.swing.*;
+import javax.xml.crypto.Data;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Payment {
 
-    public static Validation validating;
-    public static HashCode hashing;
-    public static Customer[] customers;
-    public static int numOfCustomers = 0;
+	public static Validation validating;
+	public static HashCode hashing;
+	public static Customer[] customers;
+	public static int customerPointer = 0;
 
     // this will check whether a card is valid
     public static Boolean isValidCard(String number) {
@@ -20,11 +24,10 @@ public class Payment {
     }// end of the createHashCode method
 
 
-    // it adds a new customer to the array of customers once the payment was successful
-    public static void addCustomer(Customer customer) {
-        customers[numOfCustomers] = customer;
-        numOfCustomers++;
-    } // end of the addCustomer method
+     // it adds a new customer to the array of customers once the payment was successful
+ 	 public static void addCustomer(Customer customer){
+		 customers[customerPointer++] = customer;
+ 	 } // end of the addCustomer method
 
 
     // it displays the payments AVG, MAX payment, and MIN payment,
@@ -76,10 +79,21 @@ public class Payment {
 
 
 
-    // write data to file, the credit card number should be encrypted
-    // using one-way hash method in the Hashing class
-    public static void writeToFile() {
-
+	// write data to file, the credit card number should be encrypted
+	// using one-way hash method in the Hashing class
+    public static void writeToFile(){
+		try {
+			FileWriter writer = new FileWriter("customer_info.txt");
+			for (Customer customer : customers) {
+				String customerInfo = customer.getId() + "," + customer.getfName() + "," +
+						customer.getlName() + "," + customer.getAmount() + "," +
+						createHashCode(String.valueOf(customer.getCard())) + "\n";
+				writer.write(customerInfo);
+			}
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("An error occurred while writing to the file.");
+		}
     } // end of the writeToFile method
 
 
@@ -90,8 +104,18 @@ public class Payment {
         hashing = new HashCode();
         validating = new Validation();
 
-        // input the number of customers and store it into variable n
-        int n = DataEntries.intInput("Input number of Customers");
+	   // input the number of customers and store it into variable n
+	    int n = 0;
+		while (true) {
+			try {
+				n = Integer.parseInt(JOptionPane.showInputDialog("Input number of Customers"));
+				if (n <= -1)
+					throw new NumberFormatException();
+				break;
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Invalid number of customers Format");
+			}
+		}
 
         customers = new Customer[n];
         String fName = "";
