@@ -63,7 +63,17 @@ public class Payment {
 		validating = new  Validation();
 
 	   // input the number of customers and store it into variable n
-	    int n = DataEntries.intInput("Input number of Customers");
+	    int n = 0;
+		while (true) {
+			try {
+				n = Integer.parseInt(JOptionPane.showInputDialog("Input number of Customers"));
+				if (n <= -1)
+					throw new NumberFormatException();
+				break;
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Invalid number of customers Format");
+			}
+		}
 
 		customers = new Customer[n];
 		String fName = "";
