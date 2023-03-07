@@ -17,9 +17,7 @@ public class Payment {
 
 	// creates a hash code for the credit card number to be stored in file
     public static String createHashCode(String number){
-
-		return null;
-
+		return hashing.getHashCode(number);
 	}// end of the createHashCode method
 
 
@@ -65,12 +63,68 @@ public class Payment {
 
 
 		for (int i = 0; i < n; i++) {
-			fName = DataEntries.strInput("Input Customer First Name");
-			lName = DataEntries.strInput("Input Customer Last Name");
-			id = DataEntries.intInput("Input Customer ID");
-			number = DataEntries.longInput("Input Customer Credit Card Number");
-			expDate = DataEntries.strInput("Input Customer Credit Card Expiration Date");
-			amount = DataEntries.doubleInput("Input Customer Payment Amount");
+			while (true) {
+				fName = JOptionPane.showInputDialog("Input Customer First Name");
+				if (fName.isEmpty() || fName.equals(" ") || !fName.matches("[a-zA-Z]+"))
+					JOptionPane.showMessageDialog(null, "Invalid Name Format");
+				else break;
+			}
+
+			while (true) {
+				lName = JOptionPane.showInputDialog("Input Customer Last Name");
+				if (lName.isEmpty() || lName.equals(" ") || !lName.matches("[a-zA-Z]+"))
+					JOptionPane.showMessageDialog(null, "Invalid Name Format");
+				else break;
+			}
+
+			while (true) {
+				try {
+					id = Integer.parseInt(JOptionPane.showInputDialog("Input Customer ID"));
+					if (id <= -1)
+						throw new NumberFormatException();
+					break;
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Invalid Customer ID Format");
+				}
+			}
+
+			//If id is zero we should stoop accepting the user input per rule #9
+			if (id == 0)
+				break;
+
+			while (true) {
+				try {
+					String ccNum = JOptionPane.showInputDialog("Input Customer Credit Card Number");
+
+					if (lName.isEmpty() || lName.equals(" "))
+						throw new NumberFormatException();
+					boolean isValid = isValidCard(ccNum);
+					if (!isValid)
+						throw new NumberFormatException();
+					number = Long.parseLong(ccNum);
+					break;
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Invalid Credit Card Number Format");
+				}
+			}
+
+			while (true) {
+				expDate = JOptionPane.showInputDialog("Input Customer Credit Card Expiration Date");
+				if (expDate.isEmpty() || expDate.equals(" "))
+					JOptionPane.showMessageDialog(null, "Invalid Credit Card Expiration Date Format");
+				else break;
+			}
+
+			while (true) {
+				try {
+					amount = Double.parseDouble(JOptionPane.showInputDialog("Input Customer Payment Amount"));
+					if (amount < 1)
+						throw new NumberFormatException();
+					break;
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Invalid Payment Amount");
+				}
+			}
 
 			CreditCard creditCard = new CreditCard(number, expDate);
 			Customer customer = new Customer(fName, lName, id, amount, creditCard);
