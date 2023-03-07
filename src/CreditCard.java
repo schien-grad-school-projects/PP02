@@ -26,6 +26,7 @@ public class CreditCard {
 
 	@Override
 	public String toString() {
-		return " Credit Card:" + " number= " + number + ", expDate= " + expDate;
+		return "credit card=" + number +
+				", exp date='" + expDate + '\'';
 	}
 }

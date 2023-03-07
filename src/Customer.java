@@ -38,7 +38,9 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Name= " + fName + " " + lName + " ,Id=" + id
-                + " ,Payment= $" + String.format("%.2f", amount);
+        return "name=" + fName +
+                " " + lName +
+                ", payment= $" + String.format("%.2f", amount) +
+                ", " + card.toString();
     }
 }

@@ -60,7 +60,7 @@ public class Payment {
         //Display
         String out = "";
         for (int i = 0; i < customers.length; i++) {
-            out += "Customer " + (i + 1) + ":\t" + customers[i].toString() + "\n";
+            out += (i + 1) + ": " + customers[i].toString() + "\n";
         }
 
         out += "--------------------------------------------------------------------------------------------\n";
@@ -190,6 +190,9 @@ public class Payment {
 
             CreditCard creditCard = new CreditCard(number, expDate);
             Customer customer = new Customer(fName, lName, id, amount, creditCard);
+            String out = "Successfully processed payment for:\n" + customer.toString();
+            JOptionPane.showMessageDialog(null, new JTextArea(out));
+
             addCustomer(customer);
         }
 
