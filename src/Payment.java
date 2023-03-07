@@ -1,5 +1,7 @@
 import javax.swing.*;
 import javax.xml.crypto.Data;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +11,7 @@ public class Payment {
 	public static Validation validating;
 	public static HashCode hashing;
 	public static Customer[] customers;
+	public static int customerPointer = 0;
 
 	// this will check whether a card is valid
 	public static Boolean isValidCard(String number){
@@ -23,9 +26,7 @@ public class Payment {
 
      // it adds a new customer to the array of customers once the payment was successful
  	 public static void addCustomer(Customer customer){
-		 List<Customer> c = Arrays.asList(customers);
-		 c.add(customer);
-		 customers = c.stream().toArray(Customer[]::new);
+		 customers[customerPointer++] = customer;
  	 } // end of the addCustomer method
 
 
@@ -39,7 +40,18 @@ public class Payment {
 	// write data to file, the credit card number should be encrypted
 	// using one-way hash method in the Hashing class
     public static void writeToFile(){
-
+		try {
+			FileWriter writer = new FileWriter("customer_info.txt");
+			for (Customer customer : customers) {
+				String customerInfo = customer.getId() + "," + customer.getfName() + "," +
+						customer.getlName() + "," + customer.getAmount() + "," +
+						createHashCode(String.valueOf(customer.getCard())) + "\n";
+				writer.write(customerInfo);
+			}
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("An error occurred while writing to the file.");
+		}
     } // end of the writeToFile method
 
 
