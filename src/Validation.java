@@ -18,12 +18,7 @@ public class Validation {
     for (int i = stringNumber.length()-2; i > -1 ; i-=2) {
 
       int tmpNum = Integer.valueOf(stringNumber.charAt(i)-'0') * 2;
-      if(tmpNum > 9 ){
-        sum+= tmpNum/10 + tmpNum%10;
-      }
-      else{
-        sum+=tmpNum;
-      }
+      sum += singleDigit(tmpNum);
     }
 	  return sum;
   }// end of totalEevenNumbers method
@@ -31,7 +26,12 @@ public class Validation {
   // Return the same number if it is a single digit, otherwise, return the sum of
   // the two digits in this number
   private int singleDigit(int number) {
-    return 0;
+    if(number > 9 ){
+      return number/10 + number%10;
+    }
+    else{
+      return number;
+    }
   } // end of singleDigit method
 
 
