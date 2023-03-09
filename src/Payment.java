@@ -1,3 +1,17 @@
+//*********************************************************************
+//*                                                                   *
+//* CIS611                   Spring 2023               Trenton Schien *
+//*                                                    Jose Escobar   *
+//*                      Program Project PP02                         *
+//*                                                                   *
+//*                This collects/shows payment info                   *
+//*                                                                   *
+//*                                                                   *
+//*                           3-9-2023                                *
+//*                                                                   *
+//*                   Saved in: Payment.java                          *
+//*                                                                   *
+//*********************************************************************
 import javax.swing.*;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,7 +53,9 @@ public class Payment {
         double sumAmounts = 0.0;
 
         for (int i = 0; i < customers.length; i++) {
-
+            if(customers[i] == null){
+                break;
+            }
             //Find the min
             if (minCustomer.getAmount() > customers[i].getAmount()) {
                 minCustomer = customers[i];
@@ -60,6 +76,10 @@ public class Payment {
         //Display
         String out = "";
         for (int i = 0; i < customers.length; i++) {
+            if(customers[i] == null){
+                break;
+            }
+
             out += (i + 1) + ": " + customers[i].toString() + "\n";
         }
 
@@ -78,8 +98,12 @@ public class Payment {
     // using one-way hash method in the Hashing class
     public static void writeToFile() {
         try {
-            FileWriter writer = new FileWriter("customer_info.txt");
+            FileWriter writer = new FileWriter("Customer.txt");
             for (Customer customer : customers) {
+                if(customer == null){
+                    break;
+                }
+
                 String customerInfo = customer.getId() + "," + customer.getfName() + "," +
                         customer.getlName() + "," + customer.getAmount() + "," +
                         createHashCode(String.valueOf(customer.getCard())) + "\n";
@@ -104,7 +128,7 @@ public class Payment {
         while (true) {
             try {
                 n = Integer.parseInt(JOptionPane.showInputDialog("Input number of Customers"));
-                if (n <= -1)
+                if (n <= 0)
                     throw new NumberFormatException();
                 break;
             } catch (NumberFormatException ex) {
@@ -158,11 +182,6 @@ public class Payment {
                     if (lName.isEmpty() || lName.equals(" "))
                         throw new NumberFormatException();
 
-//                    boolean isValid = isValidCard(ccNum);
-//                    if (!isValid)
-//                        throw new NumberFormatException();
-
-
                     number = Long.parseLong(ccNum);
                     break;
                 } catch (NumberFormatException ex) {
@@ -188,17 +207,22 @@ public class Payment {
                 }
             }
 
-            CreditCard creditCard = new CreditCard(number, expDate);
-            Customer customer = new Customer(fName, lName, id, amount, creditCard);
-            String out = "Successfully processed payment for:\n" + customer.toString();
-            JOptionPane.showMessageDialog(null, new JTextArea(out));
+            if(isValidCard(String.valueOf(number))){
+                CreditCard creditCard = new CreditCard(number, expDate);
+                Customer customer = new Customer(fName, lName, id, amount, creditCard);
+                String out = "Successfully processed payment for:\n" + customer.toString();
+                JOptionPane.showMessageDialog(null, new JTextArea(out));
 
-            addCustomer(customer);
+                addCustomer(customer);
+            }
+
         }
 
+        if(customers[0] != null){
+            displayStat();
+            writeToFile();
+        }
 
-        displayStat();
-        writeToFile();
     }
 
 }

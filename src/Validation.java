@@ -1,3 +1,17 @@
+//*********************************************************************
+//*                                                                   *
+//* CIS611                   Spring 2023               Trenton Schien *
+//*                                                    Jose Escobar   *
+//*                      Program Project PP02                         *
+//*                                                                   *
+//*                   This validates card number                      *
+//*                                                                   *
+//*                                                                   *
+//*                           3-9-2023                                *
+//*                                                                   *
+//*                 Saved in: Validation.java                         *
+//*                                                                   *
+//*********************************************************************
 public class Validation {
 
 

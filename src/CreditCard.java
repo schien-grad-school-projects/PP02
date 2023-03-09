@@ -1,3 +1,17 @@
+//*********************************************************************
+//*                                                                   *
+//* CIS611                   Spring 2023               Trenton Schien *
+//*                                                    Jose Escobar   *
+//*                      Program Project PP02                         *
+//*                                                                   *
+//*                  This is a Credit card object                     *
+//*                                                                   *
+//*                                                                   *
+//*                           3-9-2023                                *
+//*                                                                   *
+//*                  Saved in: CreditCard.java                        *
+//*                                                                   *
+//*********************************************************************
 public class CreditCard {
 	
 	private long number;

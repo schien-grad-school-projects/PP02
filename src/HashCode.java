@@ -1,3 +1,17 @@
+//*********************************************************************
+//*                                                                   *
+//* CIS611                   Spring 2023               Trenton Schien *
+//*                                                    Jose Escobar   *
+//*                      Program Project PP02                         *
+//*                                                                   *
+//*               This will encrypt the card numbers                  *
+//*                                                                   *
+//*                                                                   *
+//*                           3-9-2023                                *
+//*                                                                   *
+//*                   Saved in: HashCode.java                         *
+//*                                                                   *
+//*********************************************************************
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

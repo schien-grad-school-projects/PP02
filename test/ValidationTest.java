@@ -1,4 +1,17 @@
-
+//*********************************************************************
+//*                                                                   *
+//* CIS611                   Spring 2023               Trenton Schien *
+//*                                                    Jose Ecobar    *
+//*                    Program Assignment PP02                        *
+//*                                                                   *
+//*               This will make a report on cost of                  *
+//*                          advertisements                           *
+//*                                                                   *
+//*                           2-2-2023                                *
+//*                                                                   *
+//*                 Saved in: CostAnalysis.java                       *
+//*                                                                   *
+//*********************************************************************
 
 public class ValidationTest {
 
